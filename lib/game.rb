@@ -1,7 +1,9 @@
 require 'rest-client'
 require 'json'
 require 'pry'
+require_relative 'character_info_methods.rb'
 
+# API data method
 def got_info
   response = RestClient.get("https://anapioficeandfire.com/api/characters")
   response_hash = JSON.parse(response)
@@ -12,7 +14,46 @@ $user_score = 10
 $round_number = 0
 
 # random_chatacter = randomiser + API info
-$random_character = "Eddard Stark"
+$random_character = "Walder"
+
+$known_info = []
+
+# character info methods
+def marital_status
+  character = $random_character
+  got_info.each {|people|
+  if people["name"] == character && people["spouse"] = ""
+    $known_info << "The character is single"
+     puts "The character is single"
+  elsif people["name"] == character
+    $known_info << "The character is married"
+    return "The character is married"
+  end
+}
+end
+
+def first_appearance
+  got_info.each {|people|
+  if people["name"] == $random_character
+    $known_info << "The character first appeared in #{people["tvSeries"][0]}"
+     puts "The character first appeared in #{people["tvSeries"][0]}"
+  end
+}
+end
+
+def dead_or_alive
+  got_info.each {|people|
+  if people["name"] == $random_character && people["died"] = ""
+    $known_info << "The character is alive at the end of season 5"
+     puts "The character is alive at the end of season 5"
+  elsif people["name"] == $random_character
+    $known_info << "The character is dead"
+    return "The character is dead"
+  end
+}
+end
+
+#character info methods end
 
 def welcome
   puts "When you play the game of thrones you either win or  you die. In this game you’ll either win or lose – significantly decreasing the stakes and potential harm to the user"
@@ -33,12 +74,12 @@ def help
 
 # quiz methods
 def guess_character
-  random_character = "Ned Stark"
   user_guess = gets.chomp
-  if user_guess == random_character
+  if user_guess == $random_character
     win
-  else puts "That's not the right answer! Try again"
-    $user_score -= 2
+  else $user_score -= 5
+    puts "That's not the right answer! You've lost 5 points making your score #{$user_score}. Try again."
+
     quiz
   end
 end
@@ -56,11 +97,25 @@ def character_info
 
   choice = gets.chomp
 
-    choice == "1"
+  if choice == "1"
+  marital_status
+
+elsif choice == "2"
+
+  first_appearance
+elsif choice == "3"
+  dead_or_alive
+  quiz
+  end
 end
 
 def known_information
-  puts "This is what you know"
+  $known_info.each {|info|
+    puts "#{info}"
+  }
+  puts "Your current score is #{$user_score}."
+  sleep(5)
+
 end
 
 def quit
@@ -78,7 +133,7 @@ def quiz
   Now choose an option:
         1. Guess the character
         2. Reveal character information
-        3. Show score and known information
+        3. Show score and known character information
         4. Quit"
 
         user_response = gets.chomp
@@ -90,16 +145,18 @@ def quiz
         character_info
       elsif user_response == "3"
         known_information
-      elsif user_response == "4"
+        quiz
+      else user_response == "4"
         quit
         break
       end
     end
+  end
 
-end
+quiz
 
-binding.pry
-wdw
+
+
 
 # run method
 # user_response1 = ''
