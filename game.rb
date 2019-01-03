@@ -137,11 +137,10 @@ quiz_choices
 
 
 
-# run method
-# user_response1 = ''
-# welcome
-# options
-# user_response1 = gets.chomp
-# if user_response1 == 1
-#   quiz
-#   user_response2 = gets.chomp
+run method
+welcome
+quiz
+
+
+  quiz
+  user_response2 = gets.chomp
