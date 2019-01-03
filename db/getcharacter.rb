@@ -33,7 +33,6 @@ class GetCharacter
     character.delete_if do |attr, value|
       value == "" || attr == :url || attr == :povBooks
     end
-    if 
     character
   end
 end

@@ -4,12 +4,15 @@ require 'pry'
 
 # TEST DATA
 # => User score needs to be tracked at all times
-$user_score = 10
+$pool = ["Eddard Stark", "Arya Stark", "Bronn", "Brienne of Tarth"]
 # => Track round number to track number of guesses - to include in success message - and show different character info for different rounds
 $round_number = 0
 $random_character = "Walder"
 
 $known_info = []
+
+def generate_characters_to_guess
+  Character.all.select {|character| }
 
 def welcome
   puts "When you play the game of thrones you either win or you die. In this game you’ll either win or lose – significantly decreasing the stakes and potential harm to the user"
@@ -30,7 +33,14 @@ def help
       end
 
 # quiz methods
+
+def selecting_characters
+  character_list = GameCharacter.new
+  $characters = $pool.shuffle.map {|character| Character.find_by(name: character)}
+  $characters.new.each {|character| character_list.character_id = }
+
 def guess_character
+  "Who is it?"
   user_guess = gets.chomp
   if user_guess == $random_character
     win
@@ -77,15 +87,23 @@ def known_information
 end
 
 def quiz
-  puts "You’re acting Hand of the Queen; rebellion and betrayal are rife in the Kingdom and a plot to overthrow the Queen is afoot. The rebel leader lurks in our midst – is it a long-time foe? Or dearest of friend? It’s your job to discover the identity of this traitor and bring them to justice. After all, treason is treason.
+  puts "Guess the charcters! You have to guess the Game of Thrones characters."
 
-  You start with 20 points and can either take a guess at who the traitor is or reveal information about them. An incorrect guess will deduct 5 points, revealing information about the traitor deducts 2 points. Guess the correct answer and you get bonus points depending on how many guesses it took. Earn enough points to top the leaderboard!
+  "Each round consists of either guessing the character or revealing information about them. The more rounds it takes for you to guess the characters, the fewer points you earn. Your rounds reset after you guess the character.
 
-  You can view this information and find more tips by typing ‘Help’ at any time."
+  You will guess a maxiumum of 8 characters, guess them all to maximise your points!
 
-  $character = Character.find(1..2000)
+  However, if you guess the wrong character 5 times, it's game over!
+
+  You can view this information by typing ‘Help’ at any time."
+
+
+  $characters = $pool.shuffle.map {|character| Character.find_by(name: character)}
+
   $game = Game.new
-  $score = Score.new
+
+
+
 
 
 end
