@@ -7,6 +7,7 @@ require_relative 'get.rb'
 
 class GetCharacter < Get
 
+
   # def self.obtain_character(id = 1)
   #   character = RestClient.get("https://www.anapioficeandfire.com/api/characters/#{id}")
   #   character_hash = JSON.parse(character)
