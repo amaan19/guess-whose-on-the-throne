@@ -1,8 +1,8 @@
 require_relative 'getcharacter.rb'
-require_relative 'getattribute.rb'
 require_relative 'gettitle.rb'
 require_relative 'getaliase.rb'
 require_relative 'getallegiance.rb'
+require_relative 'getcharacterallegiance.rb'
 # require_relative '../lib/models/character.rb'
 # require_relative '../lib/models/game.rb'
 # # require_relative '../lib/models/game_character.rb'
@@ -16,45 +16,68 @@ require_relative 'getallegiance.rb'
 require_relative '../config/environment.rb'
 
 
-# 2137.times do |i|
-40.times do |i|
+2137.times do |i|
   i += 1
-  if GetCharacter.build_character_hash(i).keys.include?(:name)
-    Character.create(GetCharacter.build_character_hash(i))
+  if i != 1508 || i != 1509 || i != 1510 || i != 1511
+    if GetCharacter.build_character_hash(i).keys.include?(:name)
+      Character.create(GetCharacter.build_character_hash(i))
+    end
   end
 end
 
 $counter1 = 0
-# 2137.times do |i|
-40.times do |i|
+2137.times do |i|
   i += 1
-  if GetCharacter.build_character_hash(i).keys.include?(:name)
-    $counter1 += 1
-    array = GetTitle.array(i)
-    if array.first != ""
-      array.each {|v| Title.create(title: v, character_id: $counter1)}
+  if i != 1508 || i != 1509 || i != 1510 || i != 1511
+    if GetCharacter.build_character_hash(i).keys.include?(:name)
+      $counter1 += 1
+      array = GetTitle.array(i)
+      if array.first != ""
+        array.each {|v| Title.create(title: v, character_id: $counter1)}
+      end
     end
   end
 end
 
 $counter2 = 0
-# 2137.times do |i|
-40.times do |i|
+2137.times do |i|
   i += 1
-  if GetCharacter.build_character_hash(i).keys.include?(:name)
-    $counter2 += 1
-    array = GetAliase.array(i)
-    if array.first != ""
-      array.each {|aliase| Aliase.create(name: aliase, character_id: $counter2)}
+  if i != 1508 || i != 1509 || i != 1510 || i != 1511
+    if GetCharacter.build_character_hash(i).keys.include?(:name)
+      $counter2 += 1
+      array = GetAliase.array(i)
+      if array.first != ""
+        array.each {|aliase| Aliase.create(name: aliase, character_id: $counter2)}
+      end
     end
   end
 end
 
-# 443.times do |i|
-20.times do |i|
+443.times do |i|
   i += 1
-  hash = GetAllegiance.get_name(i)
-  hash.each {|k, v| Allegiance.create(house: v)}
+  Allegiance.create(GetAllegiance.get_name(i))
+end
+
+Allegiance.create(:house => "No Allegiance")
+
+$counter3 = 0
+2137.times do |i|
+  i += 1
+  if i != 1508 || i != 1509 || i != 1510 || i != 1511
+    if GetCharacter.build_character_hash(i).keys.include?(:name)
+      n = 0
+      $counter3 += 1
+      array = GetCharacterAllegiance.allegiances(i)
+      if array.first == "No Allegiance"
+        CharacterAllegiance.create(character_id: $counter3, allegiance_id: 444)
+      else
+        while n < array.count
+          CharacterAllegiance.create(character_id: $counter3, allegiance_id: Allegiance.where(house: array[n]).ids.first)
+          n += 1
+        end
+      end
+    end
+  end
 end
 
 # Game.create(username: "Harry", score: 122)
