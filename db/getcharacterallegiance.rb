@@ -5,11 +5,10 @@ require 'json'
 require 'pry'
 require_relative 'get.rb'
 
-class GetTitle < Get
+class GetCharacterAllegiance < Get
 
-  def self.array(id=1)
-    character_hash = self.books?(id)
-    character_hash[:titles]
+  def self.allegiances(id = 1)
+    self.books?(id)[:allegiances]
   end
 
 end
