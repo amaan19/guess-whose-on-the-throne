@@ -53,6 +53,7 @@ $counter2 = 0
   end
 end
 
+
 443.times do |i|
   i += 1
   Allegiance.create(GetAllegiance.get_name(i))

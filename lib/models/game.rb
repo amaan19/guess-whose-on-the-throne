@@ -12,6 +12,7 @@ class Game < ActiveRecord::Base
   def self.theme
     system "afplay -t 7 /Users/harryturner/Downloads/got_theme.mp3"
   end
+
 end
 
 # # Game.create(username: "Turner", score: 50)
