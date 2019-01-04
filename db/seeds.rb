@@ -51,7 +51,7 @@ $counter2 = 0
 end
 
 # 443.times do |i|
-20.times do |i|
+40.times do |i|
   i += 1
   hash = GetAllegiance.get_name(i)
   hash.each {|k, v| Allegiance.create(house: v)}
