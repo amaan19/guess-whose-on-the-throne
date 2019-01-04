@@ -1,3 +1,42 @@
+$attribute_array = ["Marital Status", "Dead or Alive?", "Gender", "First appearance", "Last appearance", "Culture", "Allegiance", "Title", "Nicknames", "Actor"]
+
+def attributes
+  $attribute_array.each_with_index.map {|attribute, index|
+    "#{index + 1}. #{attribute}"
+  }
+end
+
+
+
+
+
+
+def reveal_attributes
+puts "What would you like to know?"
+
+if $round == 1 || 2
+
+puts $attribute_array[0]
+     $attribute_array[1]
+     $attribute_array[2]
+
+     choice = gets.chomp
+
+     if choice == "1"
+     marital_status
+
+     elsif choice == "2"
+
+     first_appearance
+     elsif choice == "3"
+     dead_or_alive
+     end
+   end
+ end
+
+
+
+
 #Round 1 attributes
 
 def married?

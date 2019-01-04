@@ -198,8 +198,8 @@ end
 
 
 
-  # quiz
-  # character_selection
-  # new_character
-  # new_round
+  quiz
+  character_selection
+  new_character
+  new_round
   quiz_choices
