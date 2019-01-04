@@ -9,3 +9,4 @@ gem 'game_of_thrones_api'
 gem 'rest-client'
 gem "table_print"
 gem 'pull_tempfile'
+gem 'tty-box'

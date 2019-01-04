@@ -16,42 +16,39 @@ require_relative 'getcharacterallegiance.rb'
 require_relative '../config/environment.rb'
 
 
-2137.times do |i|
+1500.times do |i|
   i += 1
-  if i != 1508 || i != 1509 || i != 1510 || i != 1511
-    if GetCharacter.build_character_hash(i).keys.include?(:name)
-      Character.create(GetCharacter.build_character_hash(i))
-    end
+    if GetCharacter.build_character_hash(i).keys.include?(:name) && GetCharacter.build_character_hash(i)[:number_of_appearances] > 2
+    Character.create(GetCharacter.build_character_hash(i))
   end
 end
+
 
 $counter1 = 0
-2137.times do |i|
+1500.times do |i|
   i += 1
-  if i != 1508 || i != 1509 || i != 1510 || i != 1511
-    if GetCharacter.build_character_hash(i).keys.include?(:name)
-      $counter1 += 1
-      array = GetTitle.array(i)
-      if array.first != ""
-        array.each {|v| Title.create(title: v, character_id: $counter1)}
-      end
+    if GetCharacter.build_character_hash(i).keys.include?(:name) && GetCharacter.build_character_hash(i)[:number_of_appearances] > 2
+    $counter1 += 1
+    array = GetTitle.array(i)
+    if array.first != ""
+      array.each {|v| Title.create(title: v, character_id: $counter1)}
     end
   end
 end
 
+
 $counter2 = 0
-2137.times do |i|
+1500.times do |i|
   i += 1
-  if i != 1508 || i != 1509 || i != 1510 || i != 1511
-    if GetCharacter.build_character_hash(i).keys.include?(:name)
-      $counter2 += 1
-      array = GetAliase.array(i)
-      if array.first != ""
-        array.each {|aliase| Aliase.create(name: aliase, character_id: $counter2)}
-      end
+  if GetCharacter.build_character_hash(i).keys.include?(:name) && GetCharacter.build_character_hash(i)[:number_of_appearances] > 2
+    $counter2 += 1
+    array = GetAliase.array(i)
+    if array.first != ""
+      array.each {|aliase| Aliase.create(name: aliase, character_id: $counter2)}
     end
   end
 end
+
 
 443.times do |i|
   i += 1
@@ -61,24 +58,23 @@ end
 Allegiance.create(:house => "No Allegiance")
 
 $counter3 = 0
-2137.times do |i|
+1500.times do |i|
   i += 1
-  if i != 1508 || i != 1509 || i != 1510 || i != 1511
-    if GetCharacter.build_character_hash(i).keys.include?(:name)
-      n = 0
-      $counter3 += 1
-      array = GetCharacterAllegiance.allegiances(i)
-      if array.first == "No Allegiance"
-        CharacterAllegiance.create(character_id: $counter3, allegiance_id: 444)
-      else
-        while n < array.count
-          CharacterAllegiance.create(character_id: $counter3, allegiance_id: Allegiance.where(house: array[n]).ids.first)
-          n += 1
-        end
+    if GetCharacter.build_character_hash(i).keys.include?(:name) && GetCharacter.build_character_hash(i)[:number_of_appearances] > 2
+    n = 0
+    $counter3 += 1
+    array = GetCharacterAllegiance.allegiances(i)
+    if array.first == "No Allegiance"
+      CharacterAllegiance.create(character_id: $counter3, allegiance_id: 444)
+    else
+      while n < array.count
+        CharacterAllegiance.create(character_id: $counter3, allegiance_id: Allegiance.where(house: array[n]).ids.first)
+        n += 1
       end
     end
   end
 end
+
 
 # Game.create(username: "Harry", score: 122)
 # Game.create(username: "Rollo", score: 22)
