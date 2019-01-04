@@ -14,11 +14,3 @@ class Game < ActiveRecord::Base
   end
 
 end
-
-# # Game.create(username: "Turner", score: 50)
-# # Game.create(username: "Bobert", score: 32)
-# # Game.create(username: "HT", score: 2)
-# # Game.create(username: "Phil", score: 565)
-# binding.pry
-#
-# p 'eof'
